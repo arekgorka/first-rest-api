@@ -31,8 +31,10 @@ public class SimpleEmailService {
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
-        Optional<String> optToCc = Optional.ofNullable(" ");
+        Optional<String> optToCc = Optional.ofNullable(mail.getToCc());
         if (optToCc.isPresent()) {
+            mailMessage.setCc(optToCc.get());
+        } else {
             mailMessage.setCc(mail.getToCc());
         }
         mailMessage.setSubject(mail.getSubject());
