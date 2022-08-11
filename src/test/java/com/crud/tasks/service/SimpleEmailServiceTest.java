@@ -27,16 +27,20 @@ class SimpleEmailServiceTest {
     @Test
     public void shouldSendEmail() {
         //Given
-        Mail mail = new Mail("test@test.com",null,"Test", "Test Message");
+        Mail builderMail = Mail.builder()
+                .mailTo("test@test.com")
+                .subject("Test")
+                .message("Test message")
+                .build();
+
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(mail.getMailTo());
-        mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getMessage());
-        mailMessage.setCc(mail.getToCc());
+        mailMessage.setTo(builderMail.getMailTo());
+        mailMessage.setSubject(builderMail.getSubject());
+        mailMessage.setText(builderMail.getMessage());
 
         //When
-        simpleEmailService.send(mail);
+        simpleEmailService.send(builderMail);
 
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
