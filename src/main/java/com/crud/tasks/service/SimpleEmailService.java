@@ -36,8 +36,6 @@ public class SimpleEmailService {
         Optional<String> optToCc = Optional.ofNullable(mail.getToCc());
         if (optToCc.isPresent()) {
             mailMessage.setCc(optToCc.get());
-        } else {
-            mailMessage.setCc(mail.getToCc());
         }
         return mailMessage;
     }
