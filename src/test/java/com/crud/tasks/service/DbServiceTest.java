@@ -84,4 +84,6 @@ public class DbServiceTest {
         //Then
         verify(dbService,times(1)).deleteTask(task.getId());
     }
+
+    //assertThrows(TaskNotFoundException.class,()-> dbService.getTask(-2L));
 }
