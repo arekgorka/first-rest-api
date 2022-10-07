@@ -5,9 +5,11 @@ import com.crud.tasks.domain.Mail;
 import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.SimpleEmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+@EnableScheduling
 @Component
 @RequiredArgsConstructor
 public class EmailScheduler {
@@ -26,7 +28,7 @@ public class EmailScheduler {
         } else {
             taskOrTasks = "tasks";
         }
-        simpleEmailService.send(
+        simpleEmailService.sendDailyMail(
                 new Mail(
                         adminConfig.getAdminMail(),
                         SUBJECT,

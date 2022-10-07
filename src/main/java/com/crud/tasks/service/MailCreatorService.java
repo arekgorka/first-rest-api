@@ -51,4 +51,23 @@ public class MailCreatorService {
         return templateEngine.process("mail/created-trello-card-mail", context);
     }
 
+    public String buildDailyAmountTasksEmail(String message) {
+
+        List<String> listWhy = new ArrayList<>();
+        listWhy.add("You have an account on the TasksCrud.com");
+        listWhy.add("You subscribe our newsletter");
+        listWhy.add("You have a premium account");
+
+        Context context = new Context();
+        context.setVariable("message_daily", message);
+        context.setVariable("button_daily","View Tasks");
+        context.setVariable("tasks_crud_url","https://arekgorka.github.io/");
+        context.setVariable("company_config",companyConfig);
+        context.setVariable("admin_config_daily",adminConfig);
+        context.setVariable("is_friend_daily",true);
+        context.setVariable("daily_information","daily information mail");
+        context.setVariable("listWhy_daily",listWhy);
+        return templateEngine.process("mail/daily-amount-tasks-mail",context);
+    }
+
 }
